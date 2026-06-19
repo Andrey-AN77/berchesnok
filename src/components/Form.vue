@@ -10,25 +10,20 @@
   <div class="for-date">
     <label>Начало бронирования</label>
     <div class="field">{{ formatDay(record.start) }}</div>
-    
-    <div class="for-select" v-if="record.maxTime">
-      <label > Продолжительность</label>
-    <select class="field" @change="setEnd()" ref="select">
-      <option disabled selected style="color:red">Выберите продолжительность</option>
-      <option
-        v-for="h in record.maxTime"
-        :key="h" 
-        :value="h"
-      >{{h}} час.</option>
 
-    </select >
+    <div class="for-select" v-if="record.maxTime">
+      <label> Продолжительность</label>
+      <select class="field" @change="setEnd()" ref="select">
+        <option disabled selected style="color: red">Выберите продолжительность</option>
+        <option v-for="h in record.maxTime" :key="h" :value="h">{{ h }} час.</option>
+      </select>
     </div>
 
     <label>Конец бронирования</label>
     <div class="field" v-if="record.end != ''">{{ formatDay(record.end) }}</div>
   </div>
 
-  <div> 
+  <div>
     <label>Описание</label>
     <textarea class="form-control" cols="30" rows="6" v-model="record.descr"></textarea>
   </div>
@@ -40,7 +35,7 @@
       type="text"
       v-model="record.email"
       class="field"
-      :class="validEmail() ? 'green':'red'"
+      :class="validEmail() ? 'green' : 'red'"
     />
     <div class="for-error">
       <span v-if="record.email.length == 0">Поле должно быть заполнено. </span>
@@ -54,23 +49,18 @@
       v-model="record.phone"
       class="field"
       v-maska="'+7-#####-#####'"
-      :class="validPhone() ? 'green':'red'"
+      :class="validPhone() ? 'green' : 'red'"
     />
     <div class="for-error">
       <span v-if="record.phone.length == 0">Поле должно быть заполнено</span>
-      <span v-else-if="!validPhone()"
-        >Введите 10 знаков без 8</span
-      >
+      <span v-else-if="!validPhone()">Введите 10 знаков без 8</span>
     </div>
   </div>
-  <hr>
+  <hr />
   <div class="for-buttons">
-    <button class="btn btn-outline-warning" @click="onUpdate('close')" >Отмена</button>
-    <button class="btn btn-outline-success" @click="onUpdate('save')" >Сохранить</button>
-
+    <button class="btn btn-outline-warning" @click="onUpdate('close')">Отмена</button>
+    <button class="btn btn-outline-success" @click="onUpdate('save')">Сохранить</button>
   </div>
-
-  
 </template>
 
 <script>
@@ -80,20 +70,25 @@ export default {
   setup() {
     const toast = useToast();
     return {
-      toast
-    }
+      toast,
+    };
   },
   props: {
     record: {
       type: Object,
     },
   },
-  emits:['save','close'],
+  emits: ["save", "close"],
   components: {},
-  computed:{
-    isValid(){
-      return this.validEmail() && this.validPhone() && this.record.title.length > 2 && this.record.end !=''
-    }
+  computed: {
+    isValid() {
+      return (
+        this.validEmail() &&
+        this.validPhone() &&
+        this.record.title.length > 2 &&
+        this.record.end != ""
+      );
+    },
   },
   methods: {
     validEmail() {
@@ -107,27 +102,22 @@ export default {
     formatDay(date) {
       return new Date(date).format("DD.MM.YYYY, HH:mm");
     },
-    setEnd(){
-      let hourse = +this.$refs.select.value
+    setEnd() {
+      let hourse = +this.$refs.select.value;
       this.record.end = new Date(this.record.start).addHours(hourse);
     },
-    onUpdate(action){
-
-      if(action == 'close'){
-        this.$emit('close')
+    onUpdate(action) {
+      if (action == "close") {
+        this.$emit("close");
       }
-      if(action == 'save' && !this.isValid){
-        this.toast.error('Не верно заполнены поля')
-        return
-      }else{
-        this.$emit('save')
+      if (action == "save" && !this.isValid) {
+        this.toast.error("Не верно заполнены поля");
+        return;
+      } else {
+        this.$emit("save");
       }
-      
-    }
+    },
   },
-
-  
-
 };
 </script>
 
@@ -135,8 +125,7 @@ export default {
 .for-name,
 .for-date,
 .for-email,
-.for-select
-.for-phone {
+.for-select .for-phone {
   width: 100%;
   border-bottom: 1px solid rgb(95, 95, 95);
   margin-bottom: 5px;
@@ -147,17 +136,17 @@ export default {
   padding-left: 5px;
   font-style: italic;
 }
-.for-buttons{
+.for-buttons {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.confirm{
+.confirm {
   padding: 10px;
   background: #b4f8d9;
   border-radius: 7px;
 }
-.delete{
+.delete {
   padding: 10px;
   background: #e78b8b;
   border-radius: 7px;

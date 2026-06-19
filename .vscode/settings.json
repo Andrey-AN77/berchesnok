@@ -1,0 +1,6 @@
+{
+    "vue.autoInsert.dotValue": true,
+    "vue.format.script.initialIndent": true,
+    "vue.format.style.initialIndent": true,
+    "vue3snippets.enable-compile-vue-file-on-did-save-code": true
+}

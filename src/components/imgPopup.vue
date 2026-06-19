@@ -1,33 +1,27 @@
 <template>
-  <div class="wrap"  >
-      <div class="modal" tabindex="-1" @click="onEmit">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-              <div class="forimg" @click="onEmit">
-                <img :src="path" :alt="path">
-              </div>
+  <div class="wrap">
+    <div class="modal" tabindex="-1" @click="onEmit">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="forimg" @click="onEmit">
+              <img :src="path" :alt="path" />
             </div>
-
           </div>
         </div>
       </div>
-
-
+    </div>
   </div>
-
 </template>
 
 <script setup>
 const props = defineProps({
-  path:String,
+  path: String,
+});
 
-})
+const emit = defineEmits(["close"]);
 
-const emit = defineEmits(['close'])
-
-const onEmit = ()=>emit('close')
-
+const onEmit = () => emit("close");
 </script>
 
 <style scoped>
@@ -44,14 +38,14 @@ const onEmit = ()=>emit('close')
   align-items: center;
   overflow: auto;
 }
-.modal-dialog{
+.modal-dialog {
   max-width: 1000px;
 }
 
-.modal{
+.modal {
   display: block;
 }
-.forimg{
+.forimg {
   width: 100%;
   cursor: pointer;
 }
