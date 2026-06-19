@@ -1,0 +1,8 @@
+import{_ as v,o as g,c as y,a as n}from"./index-fb391eaf.js";const x={class:"wrap"},w={class:"modal-dialog modal-dialog-centered"},E={class:"modal-content"},b={class:"modal-body"},z=["src","alt"],B={__name:"imgPopup",props:{path:String},emits:["close"],setup(o,{emit:r}){const l=r,s=()=>l("close");return(m,a)=>(g(),y("div",x,[n("div",{class:"modal",tabindex:"-1",onClick:s},[n("div",w,[n("div",E,[n("div",b,[n("div",{class:"forimg",onClick:s},[n("img",{src:o.path,alt:o.path},null,8,z)])])])])])]))}},R=v(B,[["__scopeId","data-v-5e5792dc"]]);var u={},k={get exports(){return u},set exports(o){u=o}};/**
+ * body-scroll-freezer - Dependency-free JS module to freeze body scroll when opening modal box
+ *
+ * @version v1.0.4
+ * @link https://github.com/ramonvictor/body-scroll-freezer/
+ * @author @ramonvictor
+ * @license MIT
+ */(function(o){(function(){function r(){return typeof t<"u"?t:this.scrollWidth=t=m()}function l(){e.style.overflow="hidden",t&&(a()&&(e.style.paddingRight=t+"px"),f&&_(!0))}function s(){e.style.overflow="",t&&(e.style.paddingRight="",f&&_(!1))}function m(){var c,i=document.createElement("div");return i.setAttribute("style",["width: 100px","height: 100px","overflow: scroll","position: absolute","top: -9999px"].join(";")),e.appendChild(i),c=i.offsetWidth-i.clientWidth,e.removeChild(i),c}function a(){return e.scrollHeight>document.documentElement.clientHeight}function _(c){c?window.addEventListener("resize",h,!1):window.removeEventListener("resize",h,!1)}function h(){p||(a()?e.style.paddingRight=t+"px":e.style.paddingRight="",p=!0,window.setTimeout(function(){p=!1},150))}var t,d={},e=document.body,p=!1,f="addEventListener"in Element.prototype;d.init=r,d.freeze=l,d.unfreeze=s,o.exports=d})()})(k);const S=u;export{S as B,R as i};
