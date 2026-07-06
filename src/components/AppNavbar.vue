@@ -3,15 +3,19 @@
     <div class="logo">
 
       <img src="../assets/image/logo.png" alt="ch-logo">
+      <a class="pl-10" href="https://pokupaypermskoe.ru/company/ip-afanasev-nv1" target="_blanc">
+        <img src="/public/pp-logo.svg" alt="ch-logo">
+      </a>
+      
 
     </div>
     <div class="nav-menu">
       <ul>
-        <router-link to="/" active-class="active" class="nav-menu-item">Главная</router-link>
+        <router-link to="/" active-class="active" class="nav-menu-item">О нас</router-link>
         <router-link to="/pro-chesnok" active-class="active" class="nav-menu-item">PRO&nbsp;Чеснок</router-link>
         <router-link to="/products" active-class="active" class="nav-menu-item">Продукция</router-link>
 
-        <router-link to="/contacts" active-class="active" class="nav-menu-item">Контакты</router-link>
+        <router-link to="/contacts" active-class="active" class="nav-menu-item">Где купить</router-link>
         <!--router-link to="/_admin" active-class="active" class="nav-menu-item">&Gt;</router-link-->
       </ul>
 
@@ -62,17 +66,26 @@ import {ref} from 'vue'
 
 
 .logo {
-  color: #3B5C3D;
-  text-shadow: #fff 2px 0px 2px, #fff 0px 2px 2px, #fff 0px -2px 2px, #fff -2px 0px;
-  font-weight: bold;
+
+
+
   margin-left: 30px;
-  font-size: 3rem;
+
   position: relative;
-  width: 14%;
-  border-radius: 11%;
-  overflow: hidden;
-  min-width: 60px;
-  max-width: 90px;
+  width: 100%;
+
+
+  min-height: 60px;
+  max-height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 220px;
+}
+
+.pl-10{
+  padding: 10px;
+
 }
 
 .for-ch {
@@ -165,7 +178,7 @@ img {
 
   .logo {
     margin-left: 20px;
-    width: 14%;
+
   }
 
   .for-ch {

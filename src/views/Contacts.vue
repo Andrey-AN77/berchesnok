@@ -67,11 +67,25 @@
 
     <div class="section">
       <div class="fortext">
-        <p class="text">Вы всегда можете нам позвонить <a href="tel:+79028385964">по телефону: +7-90283-85964</a></p>
+        <p class="text">Для юридических лиц: <a href="tel:+79028385964">по телефону: +7-90283-85964</a></p>
         <p class="text">или написать нам на <a href="mailto:info@berchesnok.ru">электронную почту:
             info@berchesnok.ru</a>
         </p>
-        <p class="text">Мы благодарны Вам за отзывы и предложения.</p>
+        <hr/>
+        <p class="text">Для физических лиц наши акаунты: 
+          <span>
+            <a href="https://vk.ru/berchesnok" target="_blanc">ВК  </a>
+          </span>
+          
+          <span> или </span>
+          <span>
+
+            <a href="https://www.avito.ru/brands/cb5c31030f26fea97e74ded50b76cb19" target="_blanc">АВИТО</a>
+          </span>
+          
+        
+        </p>
+
       </div>
 
 
