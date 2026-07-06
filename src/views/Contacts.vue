@@ -75,7 +75,7 @@
 
 
     </div>
-    <h4 @click="$router.push({name:'admin'})">2026&copy;</h4>
+    <h4 >2026&copy;</h4>
     <br>
   </div>
 
