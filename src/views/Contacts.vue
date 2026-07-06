@@ -38,7 +38,8 @@
           </div>
           <div class="mb-3 field">
             <label for="phone" class="form-label">Телефон {{ !validPhone ? '❌' : '✅' }}</label>
-            <input  type="tel" class="form-control" id="phone" name="phone" v-maska="'+7-#####-#####'" v-model="phone" placeholder="+7" />
+            <input type="tel" class="form-control" id="phone" name="phone" v-maska="'+7-#####-#####'" v-model="phone"
+              placeholder="+7" />
             <div id="phoneHelp" class="form-text">Укажите телефон без 8, по которому с Вами можно связаться</div>
           </div>
 
@@ -75,7 +76,7 @@
 
 
     </div>
-    <h4 >2026&copy;</h4>
+    <h4>2026&copy;</h4>
     <br>
   </div>
 
@@ -85,93 +86,99 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue'
-import imgPopup from '../components/imgPopup.vue'
-import { vMaska } from "maska/vue"
-import { useToast } from "vue-toastification"
+  import { ref, watch, computed } from 'vue'
+  import imgPopup from '../components/imgPopup.vue'
+  import { vMaska } from "maska/vue"
+  import { useToast } from "vue-toastification"
 
-const toast = useToast()
+  const toast = useToast()
 
-import BodyScroll from 'body-scroll-freezer'
-BodyScroll.init()
-
-
-const name = ref('')
-const phone = ref('')
-const descr = ref('')
-const capcha = ref('')
+  import BodyScroll from 'body-scroll-freezer'
+  BodyScroll.init()
 
 
+  const name = ref('')
+  const phone = ref('')
+  const descr = ref('')
+  const capcha = ref('')
 
 
-const validPhone = ref(false)
-const validName = ref(false)
-const validCapcha = ref(false)
-const isPopup = ref(false)
 
-const popupOpen = ()=>{
-  isPopup.value = true
-  BodyScroll.freeze()
 
-}
+  const validPhone = ref(false)
+  const validName = ref(false)
+  const validCapcha = ref(false)
+  const isPopup = ref(false)
 
-const onClose=()=>{
-  isPopup.value = false
-  BodyScroll.unfreeze()
+  const popupOpen = () => {
+    isPopup.value = true
+    BodyScroll.freeze()
 
-}
-
-watch(phone, (newPhone) => {
-  let reg = new RegExp(/(^\+7-[0-9]{5}-[0-9]{5}$)/gm);
-  validPhone.value = reg.test(newPhone);
-})
-
-watch(name, (newName) => { validName.value = newName.length >= 5 })
-watch(capcha, (newCapcha) => { validCapcha.value = newCapcha.length == 4 })
-
-const validForm = computed(() => validPhone.value && validName.value && validCapcha.value)
-
-const clearForm = () => {name.value = phone.value = descr.value = capcha.value = ''}
-
-const onSubmit = () => {
-  if (!validForm) {
-    toast.warning('Неверно заполнены поля')
-    return
   }
 
-  const raw = {
-    'name': name.value,
-    'phone': phone.value,
-    'descr': descr.value,
-    'capcha': capcha.value
+  const onClose = () => {
+    isPopup.value = false
+    BodyScroll.unfreeze()
+
   }
 
-  fetch('./data/order/insert.php', 
-  {
-  method: 'POST',
-  body: JSON.stringify(raw),
-  headers: {'Content-type': 'application/json; charset=UTF-8'}
+  watch(phone, (newPhone) => {
+    let reg = new RegExp(/(^\+7-[0-9]{5}-[0-9]{5}$)/gm);
+    validPhone.value = reg.test(newPhone);
   })
- .then((res) => res.json())
 
- .then((data) => {
+  watch(name, (newName) => { validName.value = newName.length >= 5 })
+  watch(capcha, (newCapcha) => { validCapcha.value = newCapcha.length == 4 })
 
-    if((typeof data) !== 'object'){
-      toast.error(data)
+  const validForm = computed(() => validPhone.value && validName.value && validCapcha.value)
+
+  const clearForm = () => { name.value = phone.value = descr.value = capcha.value = '' }
+
+  const onSubmit = () => {
+    if (!validForm) {
+      toast.warning('Неверно заполнены поля')
       return
     }
 
-    if(data.status === 'error' || !data.status){
-     toast.error(data.msg)
-      return
-   }
-   toast.success(data.msg)
-   clearForm()
+    const raw = {
+      'name': name.value,
+      'phone': phone.value,
+      'descr': descr.value,
+      'capcha': capcha.value
+    }
 
-    })
-  .catch((e)=>toast.error(e))
+    fetch('./data/order/insert.php',
+      {
+        method: 'POST',
+        body: JSON.stringify(raw),
+        headers: { 'Content-type': 'application/json; charset=UTF-8' }
+      })
+      .then((res) => {
+        if (res.status != 200) {
+          toast.error(`${res.status}, ${res.statusText}`)
+          return
+        }
+        let data = res.json()
+
+        if ((typeof data) !== 'object') {
+          toast.error('data no object type')
+          return
+        }
+
+        if (data.status === 'error' || !data.status) {
+          toast.error(data.msg)
+          return
+        }
+
+        toast.success(data.msg)
+        clearForm()
+
+
+      })
+
+      .catch((e) => toast.error(e))
   }
-  
+
 
 
 
@@ -181,53 +188,57 @@ const onSubmit = () => {
 </script>
 
 <style scoped>
-.uline {
-  text-decoration: underline;
-}
-
-.forform,
-.forcapcha {
-  width: 50%;
-}
-
-.field {
-  text-align: left;
-}
-
-button.btn:hover {
-  cursor: pointer;
-}
-
-button.btn:disabled {
-  cursor: not-allowed;
-}
-
-button.btn {
-  pointer-events: auto;
-}
-.fordecl{
-  width: 35%;
-  min-width: 350px;
-  position: relative;
-  cursor: pointer;
-
-}
-.forzoom{
-  position: absolute;
-  width: 20%;
-  bottom: 20%;
-  left: 40%;
-}
-.zoom{
-  opacity: 0.4;
-}
-@media (max-width: 765px) {
-  .forform {
-    width: 90%;
+  .uline {
+    text-decoration: underline;
   }
 
+  .forform,
   .forcapcha {
-    width: 70%;
+    width: 50%;
   }
-}
+
+  .field {
+    text-align: left;
+  }
+
+  button.btn:hover {
+    cursor: pointer;
+  }
+
+  button.btn:disabled {
+    cursor: not-allowed;
+  }
+
+  button.btn {
+    pointer-events: auto;
+  }
+
+  .fordecl {
+    width: 35%;
+    min-width: 350px;
+    position: relative;
+    cursor: pointer;
+
+  }
+
+  .forzoom {
+    position: absolute;
+    width: 20%;
+    bottom: 20%;
+    left: 40%;
+  }
+
+  .zoom {
+    opacity: 0.4;
+  }
+
+  @media (max-width: 765px) {
+    .forform {
+      width: 90%;
+    }
+
+    .forcapcha {
+      width: 70%;
+    }
+  }
 </style>

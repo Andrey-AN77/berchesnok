@@ -72,13 +72,9 @@
 
 </template>
 
-<script>
+<script setup>
 import { ImgComparisonSlider } from '@img-comparison-slider/vue';
-export default {
-  components: {
-    ImgComparisonSlider
-  }
-}
+
 </script>
 
 <style scoped>

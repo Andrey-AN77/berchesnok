@@ -34,15 +34,12 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      visible: false
-    }
-  }
+<script setup>
+import {ref} from 'vue'
 
-}
+  const visible = ref(false)  
+
+
 </script>
 
 <style scoped>
@@ -71,9 +68,11 @@ export default {
   margin-left: 30px;
   font-size: 3rem;
   position: relative;
-  width: 8%;
+  width: 14%;
   border-radius: 11%;
   overflow: hidden;
+  min-width: 60px;
+  max-width: 90px;
 }
 
 .for-ch {
@@ -165,7 +164,6 @@ img {
   }
 
   .logo {
-    font-size: 2rem;
     margin-left: 20px;
     width: 14%;
   }

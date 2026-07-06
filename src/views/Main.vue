@@ -81,15 +81,15 @@
 
 </template>
 
-<script>
+<script setup>
 import { ImgComparisonSlider } from '@img-comparison-slider/vue';
 
-export default {
+/* export default {
   components: {
     ImgComparisonSlider
   }
 
-}
+} */
 
 </script>
 

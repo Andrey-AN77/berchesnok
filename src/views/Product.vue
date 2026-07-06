@@ -1,8 +1,8 @@
 <template>
-  
+
   <div class="container">
-    <img-popup v-if="isPopup" :path="curentPath" @close="onClose"/>
-    
+    <img-popup v-if="isPopup" :path="curentPath" @close="onClose" />
+
     <h1 class="center">Урожай 2025</h1>
     <div class="section">
       <p class="text lg">Дорогие друзья предлагаем Вам высококачественный чеснок урожая 2025 года.</p>
@@ -17,8 +17,8 @@
             условии, что они не влияют на общий внешний вид, качество, сохранность и товарный вид продукта в упаковке.
           </p>
           <div class="flex">
-            <div class="forimg" v-for="path, i in img5" :key="i" @click="onPopup(path)" >
-              <img :src="`/${path}`" :alt="path">  
+            <div class="forimg" v-for="path, i in img5" :key="i" @click="onPopup(path)">
+              <img :src="`/${path}`" :alt="path">
             </div>
 
           </div>
@@ -31,9 +31,9 @@
             должны быть подрезаны близко к основанию луковицы. Допускаются незначительные поверхностные дефекты, при
             условии, что они не влияют на общий внешний вид, качество, сохранность и товарный вид продукта в упаковке.
           </p>
-                    <div class="flex">
-            <div class="forimg" v-for="path, i in img4" :key="i" @click="onPopup(path)" >
-              <img :src="`/${path}`" :alt="path">  
+          <div class="flex">
+            <div class="forimg" v-for="path, i in img4" :key="i" @click="onPopup(path)">
+              <img :src="`/${path}`" :alt="path">
             </div>
 
           </div>
@@ -44,9 +44,9 @@
           <p class="text sm">Достаточно правильной формы. Допускаются небольшие разрывы покровной чешуи луковицы при
             условии, что они не влияют на общий внешний вид, качество, сохранность и товарный вид продукта в упаковке.
           </p>
-                    <div class="flex">
-            <div class="forimg" v-for="path, i in img3" :key="i" @click="onPopup(path)" >
-              <img :src="`/${path}`" :alt="path">  
+          <div class="flex">
+            <div class="forimg" v-for="path, i in img3" :key="i" @click="onPopup(path)">
+              <img :src="`/${path}`" :alt="path">
             </div>
 
           </div>
@@ -87,89 +87,93 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import imgPopup from '../components/imgPopup.vue';
+  import { ref } from 'vue'
+  import imgPopup from '../components/imgPopup.vue';
 
-import BodyScroll from 'body-scroll-freezer'
-BodyScroll.init()
+  import BodyScroll from 'body-scroll-freezer'
+  BodyScroll.init()
 
-const isPopup = ref(false)
-const curentPath = ref('')
-const img5=['ches5-1kg.jpg','ches5-1kg-2.jpg','ches5-1kg-zub.jpg']
-const img4=['ches4-1kg.jpg','ches4-1kg-2.jpg','ches4-1kg-zub.jpg']
-const img3=['ches3-1kg.jpg','ches3-1kg-2.jpg','ches3-1kg-zub.jpg']
+  const isPopup = ref(false)
+  const curentPath = ref('')
+  const img5 = ['ches5-1kg.jpg', 'ches5-1kg-2.jpg', 'ches5-1kg-zub.jpg']
+  const img4 = ['ches4-1kg.jpg', 'ches4-1kg-2.jpg', 'ches4-1kg-zub.jpg']
+  const img3 = ['ches3-1kg.jpg', 'ches3-1kg-2.jpg', 'ches3-1kg-zub.jpg']
 
-const onPopup = (src)=>{
-  curentPath.value=src
-  isPopup.value = true
-  BodyScroll.freeze()
-  
-}
+  const onPopup = (src) => {
+    curentPath.value = src
+    isPopup.value = true
+    BodyScroll.freeze()
 
-const onClose=()=>{
-  curentPath.value = ''
-  isPopup.value = false
-  BodyScroll.unfreeze()
+  }
 
-}
+  const onClose = () => {
+    curentPath.value = ''
+    isPopup.value = false
+    BodyScroll.unfreeze()
+
+  }
 
 </script>
 
 <style scoped>
-li {
-  padding: 1rem;
-}
+  li {
+    padding: 1rem;
+  }
 
-.lg {
-  padding: 0;
+  .lg {
+    padding: 0;
 
-}
-
-.sm {
-  font-size: 18px;
-  margin: 0;
-}
-
-.lg,
-li::marker {
-  font-size: 24px;
-
-}
-.flex{
-  display: flex;
-  width: 90%;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-}
-.forimg{
-  width: 30%;
-  cursor: pointer;
-}
-
-.price {
-  text-align: right;
-}
-
-@media (max-width: 550px) {
-  .price {
-    text-align: center;
   }
 
   .sm {
-    text-align: justify;
-    font-size: 14px;
+    font-size: 18px;
+    margin: 0;
   }
 
-  li>p {
-    text-align: left;
+  .lg,
+  li::marker {
+    font-size: 24px;
+
   }
-  .flex{
-    flex-direction: column;
+
+  .flex {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
   }
-  .forimg{
-    width: 100%;
-    margin: 10px 0px;
+
+  .forimg {
+    width: 30%;
+    cursor: pointer;
   }
-}
+
+  .price {
+    text-align: right;
+  }
+
+  @media (max-width: 550px) {
+    .price {
+      text-align: center;
+    }
+
+    .sm {
+      text-align: justify;
+      font-size: 14px;
+    }
+
+    li>p {
+      text-align: left;
+    }
+
+    .flex {
+      flex-direction: column;
+    }
+
+    .forimg {
+      width: 100%;
+      margin: 10px 0px;
+    }
+  }
 </style>
