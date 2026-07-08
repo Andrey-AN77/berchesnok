@@ -71,19 +71,19 @@
         <p class="text">или написать нам на <a href="mailto:info@berchesnok.ru">электронную почту:
             info@berchesnok.ru</a>
         </p>
-        <hr/>
-        <p class="text">Для физических лиц наши акаунты: 
+        <hr />
+        <p class="text">Для физических лиц наши акаунты:
           <span>
-            <a href="https://vk.ru/berchesnok" target="_blanc">ВК  </a>
+            <a href="https://vk.ru/berchesnok" target="_blanc">ВК </a>
           </span>
-          
+
           <span> или </span>
           <span>
 
             <a href="https://www.avito.ru/brands/cb5c31030f26fea97e74ded50b76cb19" target="_blanc">АВИТО</a>
           </span>
-          
-        
+
+
         </p>
 
       </div>
@@ -148,7 +148,7 @@
 
   const clearForm = () => { name.value = phone.value = descr.value = capcha.value = '' }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!validForm) {
       toast.warning('Неверно заполнены поля')
       return
@@ -161,7 +161,7 @@
       'capcha': capcha.value
     }
 
-    fetch('./data/order/insert.php',
+    await fetch('./data/order/insert.php',
       {
         method: 'POST',
         body: JSON.stringify(raw),
@@ -172,25 +172,28 @@
           toast.error(`${res.status}, ${res.statusText}`)
           return
         }
-        let data = res.json()
-
-        if ((typeof data) !== 'object') {
-          toast.error('data no object type')
-          return
-        }
-
-        if (data.status === 'error' || !data.status) {
-          toast.error(data.msg)
-          return
-        }
-
-        toast.success(data.msg)
-        clearForm()
-
-
+        let data =  res.json()
+        
+        return data
       })
+          .then((data) =>{
+          
 
-      .catch((e) => toast.error(e))
+          if ((typeof data) !== 'object') {
+            toast.error('data no object type')
+            return
+          }
+
+          if (data.status === 'error' || !data.status) {
+            toast.error(`'1 ',${data.msg}`)
+            return
+          }
+
+          toast.success(data.msg)
+          clearForm()
+        })
+
+      .catch((e) => toast.error('catch'))
   }
 
 
